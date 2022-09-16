@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "msfs-simconnect-nodejs": "0.0.1",
-    "vjoy": "^1.2.2"
+    "vjoy": "^1.2.2",
+    "express": "^4.18.1",
+    "serve-favicon": "^2.5.0"
   }
 }
