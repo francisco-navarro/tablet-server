@@ -1,14 +1,69 @@
-const { vJoy, vJoyDevice } = require('vjoy');
+let vjoy, vJoyDevice;
+let device;
 
-if (!vJoy.isEnabled()) {
-	console.log("vJoy is not enabled.");
-	process.exit();
+const BUTTONS = {
+	'TO\nCONFIG': 1,
+	ENG: 2,
+	BLEED: 3,
+	PRESS: 4,
+	ELEC: 5,
+	HYD: 6,
+	FUEL: 7,
+	APU: 8,
+	COND: 9,
+	DOOR: 10,
+	WHEEL: 11,
+	'F/CTL': 12,
+	CLR: 13,
+	STS: 14,
+	RCL: 15
 }
 
-let device = vJoyDevice.create(1);
+function init() {
+	try {
 
-device.buttons[1].set(true);
+		const lib = require('vjoy');
 
-console.log('prueba');
+		vjoy = lib.vjoy;
+		vJoyDevice = lib.vJoyDevice;
 
-device.buttons[1].set(false);
+		if (!vJoy.isEnabled()) {
+			console.log("vJoy is not enabled.");
+			process.exit();
+		}
+
+		device = vJoyDevice.create(1);	
+	
+	} catch (ex) {
+		console.warn(ex);
+	}
+		
+}
+
+function prueba() {
+	device.buttons[1].set(true);
+
+	console.log('prueba');
+
+	device.buttons[1].set(false);
+}
+
+function pushButton (txt) {
+	const btn = BUTTONS[txt];
+
+	if (btn) {
+		console.log('[vjoy] '+ btn);
+		if (device) {
+			device.buttons[btn].set(true);
+			device.buttons[btn].set(false);
+		} else {
+			console.warn('[vjoy] error - no device')
+		}
+	}
+}
+
+module.exports = {
+	init,
+	prueba,
+	pushButton
+};
