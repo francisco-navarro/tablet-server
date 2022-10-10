@@ -11,6 +11,16 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
+      "program": "${workspaceFolder}/arduino.js"
+    },
+
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "program": "${workspaceFolder}/index.js"
     }
   ]

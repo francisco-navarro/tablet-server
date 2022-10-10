@@ -24,12 +24,11 @@ function init() {
 
 		const lib = require('vjoy');
 
-		vjoy = lib.vjoy;
+		vJoy = lib.vJoy;
 		vJoyDevice = lib.vJoyDevice;
 
 		if (!vJoy.isEnabled()) {
 			console.log("vJoy is not enabled.");
-			process.exit();
 		}
 
 		device = vJoyDevice.create(1);	
@@ -55,7 +54,7 @@ function pushButton (txt) {
 		console.log('[vjoy] '+ btn);
 		if (device) {
 			device.buttons[btn].set(true);
-			device.buttons[btn].set(false);
+			setTimeout(() => device.buttons[btn].set(false), 300);
 		} else {
 			console.warn('[vjoy] error - no device')
 		}
