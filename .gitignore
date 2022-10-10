@@ -130,5 +130,5 @@ dist
 .pnp.*
 
 .DS_Store
-__pycache__
+python/src/__pycache__/*
 venv
