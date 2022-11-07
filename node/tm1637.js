@@ -147,7 +147,7 @@ class TM1637Display {
         if (num === ".") {
           // show point for previous number if needed
           acc[acc.length - 1] |= 0b10000000;
-        }else if (num === "-") {
+        } else if (num === "-") {
           acc.push(0b01000000);
         } else {
           acc.push(codigitToSegment[num] || 0);

@@ -22,7 +22,9 @@ Ejecutar con `flask --app api run --host=0.0.0.0`
 ## Modo prod
 Instalar para servir con waitress `pip install waitress`.
 
-Luego ejecutar `python api`
+Luego ejecutar `python api`. 
+
+Levanta un servidor en el puerto 8080, donde podemos escuchar por ejemplo variables de la fcu: `http://localhost:8080/fcu`
 
 # Conector node
 

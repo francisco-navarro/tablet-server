@@ -4,7 +4,11 @@ module.exports =  {
         SPEED_PINS: {
             clk: 2,
             dio: 3
-        }
+        },
+        HEADING_PINS: {
+            clk: 5,
+            dio: 4
+        },
     }
 
 };

@@ -1,35 +1,38 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
-const vjoy = require('./node/vjoy.js');
-const android = require('./node/arduino.js')
+const arduino = require('./node/arduino.js');
+const express = require('./node/express.js');
+const axios = require('axios');
 
-const app = express()
-const port = 3000;
+const REFRESH_INTERVAL = 600;
+const DEBUG_PYTHON = 0;
+const spawn = require("child_process").spawn;
+let interval;
 
-vjoy.init();
+// start python simconnect server
+var process = spawn('python', ["./python/src/api.py"]);
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(express.json());
+if (DEBUG_PYTHON) {
+  process.stdout.on('data', function(data) {
+    console.log(data.toString());
+  } );
+  process.stderr.on('data', function(data) {
+    console.warn(data.toString());
+  } );
+}
 
-app.use(express.static('public'));
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
+// start express server
+express.init();
 
-app.get('/api', (req, res) => {
-  console.log('api get request');
-  res.send("GET Request Called");
-})
-app.post('/api', (req, res) => {
-  
-  if (req.body.button) {
-    vjoy.pushButton(req.body.button);
+// loop to read variables
+setTimeout(updateVars, REFRESH_INTERVAL);
+
+function updateVars() {
+  axios.get('http://localhost:8080/fcu').then(res => {
+    arduino.setHeading(res.data.AUTOPILOT_HEADING_SELECTED || ' ');
+    arduino.setSpeed(res.data.AUTOPILOT_SPEED_SELECTED || ' ');
+  }).catch(err => {
+    console.log('Error: ', err.message);
+  });
+  if(!process.killed) {
+    setTimeout(updateVars, REFRESH_INTERVAL);
   }
-  res.send({});
-})
-
-app.listen(port, () => {
-  console.log(`App start on port ${port}\nhttp://localhost:3000/`)
-})
-
+}
