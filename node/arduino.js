@@ -1,25 +1,35 @@
 var five = require("johnny-five");
 const tm1637 = require('./tm1637.js');
+const { ARDUINO_FCU_DISPLAYS } = require('../configuration.js');
+let i =0;
+let speedDisplay;
 
-var board = new five.Board({
-    port: "COM8"
-});
-let i=0;
+try {
+  var board = new five.Board({
+    port: ARDUINO_FCU_DISPLAYS.PORT
+  });
 
-board.on("ready", function() {
-    const display = tm1637({
-        clk: 3,
-        dio: 2,
-        board: board
-      });
-    
-      display.show("    ");
-    
-      board.repl.inject({
-        display
-      });
+  board.on("ready", function () {
+    console.log('Started arduino displays on ' + ARDUINO_FCU_DISPLAYS.PORT);
+    const speedDisplay = tm1637({
+      clk: ARDUINO_FCU_DISPLAYS.SPEED_PINS.clk,
+      dio: ARDUINO_FCU_DISPLAYS.SPEED_PINS.dio,
+      board: board
+    });
 
-      board.loop(1000, () => {
-        display.show("  -" + (i++));
-      });
-});
+    speedDisplay.show("    ");
+
+    board.repl.inject({
+      speedDisplay
+    });
+
+    // para pruebas
+    board.loop(300, () => {
+      speedDisplay.show(" " + (i++));
+    });
+
+  });
+} catch (ex) {
+  console.log('Error arduino on ' + ARDUINO_FCU_DISPLAYS.PORT);
+  console.error(ex);
+}

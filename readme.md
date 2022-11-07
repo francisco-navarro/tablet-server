@@ -26,15 +26,16 @@ Luego ejecutar `python api`
 
 # Conector node
 
-Arranca un servidor de express en el puerto 3000 de lo que hay en `public/`. Tiene una ventana con iframe a spacedesk y botones del ECAM. Pulsar los botones manda una petición post a `/api` con el `button` que pulsamos. 
+`node index.js`
+Arranca un servidor de express en el puerto 3000 de lo que hay en `public/`. Tiene una ventana con iframe a spacedesk y botones del ECAM. Pulsar los botones manda una petición post a `/api` con el `button` que pulsamos. Este index.js importa vjoy.js y arduino.js.
 
 ## Botones ECAM
-Se envían a través de vjoy. Está mapeado en `index.js` los botones que recibimos en el post de  `/api`  y se hace un `vjoy.pushButton(req.body.button);`. La configuración está en `vjoy.js` 
+Se envían a través de vjoy. Está mapeado en `index.js` los botones que recibimos en el post de  `/api`  y se hace un `vjoy.pushButton(req.body.button);`. La configuración está en `node/vjoy.js` 
 
 ## Configuración vjoy
 
-En `vjoy.js` está mapeado el texto que enviemos en la variable button del api, mediante `const BUTTONS`, y aquí pulsará el 1,2,3,4... Hemos mapeado el ecam con mobiflight.
+En `node/vjoy.js` está mapeado el texto que enviemos en la variable button del api, mediante `const BUTTONS`, y aquí pulsará el 1,2,3,4... Hemos mapeado el ecam con mobiflight.
 
 # Arduino
 
-Está 
+Está en `node/arduino.js`, mediante el fichero de configuración en la ruta principal, se mapean los puertos.
