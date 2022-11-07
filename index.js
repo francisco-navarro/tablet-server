@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-const vjoy = require('./vjoy.js');
-const simc = require('./simconnect');
+const vjoy = require('./node/vjoy.js');
 
 const app = express()
 const port = 3000;
