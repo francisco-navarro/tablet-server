@@ -1,14 +1,21 @@
 const arduino = require('./node/arduino.js');
 const express = require('./node/express.js');
 const axios = require('axios');
+const debounce = require('debounce');
 
-const REFRESH_INTERVAL = 600;
-const DEBUG_PYTHON = 0;
+// require('events').EventEmitter.defaultMaxListeners = 45;
+
+
+const REFRESH_INTERVAL = 200;
+const DEBUG_PYTHON = 1;
 const spawn = require("child_process").spawn;
-let interval;
+
+
 
 // start python simconnect server
 var process = spawn('python', ["./python/src/api.py"]);
+
+
 
 if (DEBUG_PYTHON) {
   process.stdout.on('data', function(data) {
@@ -23,16 +30,26 @@ if (DEBUG_PYTHON) {
 express.init();
 
 // loop to read variables
-setTimeout(updateVars, REFRESH_INTERVAL);
+// let myInterval = setTimeout(updateVars, REFRESH_INTERVAL);
+let debounceUpdateVars = debounce(updateVars, 10);
+
+setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
 
 function updateVars() {
   axios.get('http://localhost:8080/fcu').then(res => {
+    console.log(`${res.data.AUTOPILOT_SPEED_SELECTED}-${res.data.AUTOPILOT_HEADING_SELECTED}-`);
     arduino.setHeading(res.data.AUTOPILOT_HEADING_SELECTED || ' ');
     arduino.setSpeed(res.data.AUTOPILOT_SPEED_SELECTED || ' ');
+
+    if(process.killed) {
+      console.warn('Python process killes');
+    } else {
+      setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
+    }
+
   }).catch(err => {
     console.log('Error: ', err.message);
+    setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
   });
-  if(!process.killed) {
-    setTimeout(updateVars, REFRESH_INTERVAL);
-  }
+ 
 }

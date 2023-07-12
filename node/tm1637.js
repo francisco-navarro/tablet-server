@@ -31,7 +31,7 @@ codigitToSegment = [
 
 const ADDR_AUTO = 0x40; // 0b01000000
 const STARTADDR = 0xc0; // 0b11000000
-const BRIGHTNESS = 0.5;
+const BRIGHTNESS = 0.8;
 
 class TM1637Display {
   constructor({ clk, dio, board, brightness = BRIGHTNESS }) {
@@ -60,6 +60,7 @@ class TM1637Display {
       } else if (act[0] === "i") {
         this.board.pinMode(act[1], this.board.MODES.INPUT);
         //console.log("digitalRead", act);
+        this.board.removeAllListeners();
         this.board.digitalRead(act[1], act[2]);
       }
     }
@@ -156,6 +157,7 @@ class TM1637Display {
       }, [])
       .filter((_, i) => i < 4);
 
+    this.board.removeAllListeners();
     this.start(); // Data command set
     this.writeByte(ADDR_AUTO); // Normal mode, automatic address increase, write data to the display register
     this.stop();

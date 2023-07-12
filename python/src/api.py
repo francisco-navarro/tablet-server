@@ -40,6 +40,7 @@ def me_api():
 @app.route("/fcu")
 def fcu():
     #docu https://docs.flybywiresim.com/fbw-a32nx/feature-guides/autopilot-fbw/#common
+    print('get fcu')
     return jsonify({
         "AUTOPILOT_SPEED_SELECTED": getVar('(L:A32NX_AUTOPILOT_SPEED_SELECTED)'),
         "FCU_SPD_MANAGED_DOT": getVar('(L:A32NX_FCU_SPD_MANAGED_DOT)'),
