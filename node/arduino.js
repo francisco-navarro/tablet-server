@@ -7,6 +7,9 @@ let cache = {};
 let speed, heading;
 let i = 1;
 
+try {
+
+  
   var board = new five.Board({
     port: ARDUINO_FCU_DISPLAYS.PORT
   });
@@ -29,16 +32,6 @@ let i = 1;
     speed.show("----");
     heading.show("----");
 
-    // board.repl.inject({
-    //   speed
-    // });
-
-    // board.loop(500, function()  {
-    //   // heading.show(' '+ pad(cache.heading,3 ));
-    //   // speed.show(' '+ pad(cache.speed,3 ));
-    //   // speed.show(' '+ pad(++i,3 ));
-    //   // heading.show(' '+ pad(i++,3 ));
-    // });
 
   });
 
@@ -46,6 +39,12 @@ function pad(num = 0, size) {
   num = num.toString();
   while (num.length < size) num = "0" + num;
     return num;
+}
+
+
+} catch (err) {
+  console.warn("Problema arrancando arduino!")
+  console.warn(err);
 }
 
 module.exports = {

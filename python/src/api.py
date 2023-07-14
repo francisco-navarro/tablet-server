@@ -40,6 +40,7 @@ def me_api():
 @app.route("/fcu")
 def fcu():
     #docu https://docs.flybywiresim.com/fbw-a32nx/feature-guides/autopilot-fbw/#common
+    # https://docs.flybywiresim.com/fbw-a32nx/a32nx-api/a32nx-flightdeck-api/
     print('get fcu')
     return jsonify({
         "AUTOPILOT_SPEED_SELECTED": getVar('(L:A32NX_AUTOPILOT_SPEED_SELECTED)'),
@@ -59,6 +60,7 @@ def fcu():
         "AUTOPILOT_1_ACTIVE": getVar('(L:A32NX_AUTOPILOT_1_ACTIVE)'),
         "AUTOPILOT_2_ACTIVE": getVar('(L:A32NX_AUTOPILOT_2_ACTIVE)'),
         "A/THR": getVar('(L:A32NX_AUTOTHRUST_STATUS)'),
+        "HDG-TRK / V/S-FPA": getVar('(L:A32NX_TRK_FPA_MODE_ACTIVE)'),
         "HDG-TRK / V/S-FPA": getVar('(L:A32NX_TRK_FPA_MODE_ACTIVE)'),
     })
 
