@@ -1,32 +1,14 @@
-const arduino = require('./node/arduino.js');
+const arduino = require('./node/api/arduino.js');
 const express = require('./node/express.js');
 const axios = require('axios');
 const debounce = require('debounce');
 
 
-// require('events').EventEmitter.defaultMaxListeners = 45;
-
-
 const REFRESH_INTERVAL = 5000;
-const DEBUG_PYTHON = 1;
+
 const ENABLE_ARDUINO = false;
-const spawn = require("child_process").spawn;
 
 
-
-// start python simconnect server
-var process = spawn('python', ["./python/src/api.py"]);
-
-
-
-if (DEBUG_PYTHON) {
-  process.stdout.on('data', function(data) {
-    console.log(data.toString());
-  } );
-  process.stderr.on('data', function(data) {
-    console.warn(data.toString());
-  } );
-}
 
 // start express server
 express.init();

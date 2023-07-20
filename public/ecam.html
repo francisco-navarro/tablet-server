@@ -1,0 +1,185 @@
+<head>
+  <title>A320 Local</title>
+  <link rel="stylesheet" href="ecam.css">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  
+  <script>
+    function openFullscreen() {
+      var elem = document.querySelector('#main');
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+
+    function reload () {
+      // setTimeout(()=> {
+      //   window.location.reload();
+      // }, 10000);
+
+      document.querySelectorAll('.text').forEach(createEvent);      
+    }
+
+    function createEvent(text) {
+
+      text.parentElement.addEventListener('click', async function() {
+
+        text.parentElement.style.backgroundColor = 'black';
+
+        const response = await fetch('/push-button', {
+          method: 'POST',
+          body: JSON.stringify({
+            button: text.innerText
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+
+        setTimeout(function () {
+          text.parentElement.style.backgroundColor = '#1b1a18';
+        }, 100)
+      
+
+        });
+
+        
+    }
+
+  </script>
+  <style>
+    @import url('https://github.com/polarsys/b612/blob/master/fonts/ttf/B612-Regular.ttf?raw=true');
+    @import url('https://fonts.googleapis.com/css?family=B612');
+
+  
+    
+  </style>
+</head>
+<body onload="reload()">
+  <div id="main">
+    <h1 onclick="openFullscreen()">ECAM</h1>
+    <iframe src="http://viewer.spacedesk.net/"></iframe>
+    <table class="ecam">
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">TO<br>CONFIG</span>
+          </div>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button" role="button">
+            <span class="text">ENG</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">BLEED</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">PRESS</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">ELEC</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">            
+            <span class="text">HYD</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">FUEL</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">APU</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">COND</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">DOOR</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">WHEEL</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">F/CTL</span>
+            <div class="led">&nbsp;</div>
+        </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">ALL</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button"  role="button"> 
+            <span class="text">CLR</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">STS</span>
+          </div>
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">RCL</span>
+            <div class="led">&nbsp;</div>
+          </div>
+        </td>
+        <td>
+
+        </td>
+        <td>
+          <div class="button"  role="button">
+            <span class="text">CLR</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>

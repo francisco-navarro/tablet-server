@@ -13,6 +13,8 @@
     "debounce": "^1.2.1",
     "express": "~4.18.1",
     "johnny-five": "^2.1.0",
+    "lit": "^2.7.6",
+    "lit-element": "^3.3.2",
     "msfs-simconnect-nodejs": "0.0.1",
     "request": "^2.88.2",
     "serve-favicon": "^2.5.0",
