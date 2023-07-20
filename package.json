@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
@@ -15,10 +16,12 @@
     "johnny-five": "^2.1.0",
     "lit": "^2.7.6",
     "lit-element": "^3.3.2",
-    "msfs-simconnect-nodejs": "0.0.1",
     "request": "^2.88.2",
     "serve-favicon": "^2.5.0",
-    "tm1637": "^1.0.3",
-    "vjoy": "~1.2.2"
+    "tm1637": "^1.0.3"
+  },
+  "optionalDependencies": {
+    "vjoy": "~1.2.2",
+    "msfs-simconnect-nodejs": "0.0.1"
   }
 }

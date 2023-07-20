@@ -16,12 +16,12 @@ express.init();
 // loop to read variables
 // let myInterval = setTimeout(updateVars, REFRESH_INTERVAL);
 if (ENABLE_ARDUINO) { 
-  let debounceUpdateVars = debounce(updateVars, 100);
+  let debounceUpdateVars = debounce(updateFCUVars, 100);
 
   setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
 }
 
-function updateVars() {
+function updateFCUVars() {
   axios.get('http://localhost:8080/fcu').then(res => {
     console.log(`${res.data.AUTOPILOT_SPEED_SELECTED}-${res.data.AUTOPILOT_HEADING_SELECTED}-`);
     if (ENABLE_ARDUINO) {
@@ -39,5 +39,4 @@ function updateVars() {
     console.log('Error: ', err.message);
     setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
   });
- 
 }
