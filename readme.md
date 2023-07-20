@@ -41,3 +41,6 @@ En `node/vjoy.js` está mapeado el texto que enviemos en la variable button del 
 # Arduino
 
 Está en `node/arduino.js`, mediante el fichero de configuración en la ruta principal, se mapean los puertos.
+
+
+# Front modo desarrollo

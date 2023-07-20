@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
+
+// Para acceder al valor de la variable
+console.log(environment.apiUrl); 
 
 @Component({
   selector: 'app-root',
@@ -8,6 +12,7 @@ import { Component } from '@angular/core';
       foo bar
     </header>
     <section class="content">
+      {{apiUrl}}
       <app-python-status></app-python-status>
     </section>
   </main>
@@ -16,4 +21,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-tablet';
+
+  apiUrl = environment.apiUrl;
 }
