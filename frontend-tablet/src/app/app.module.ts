@@ -8,11 +8,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
+import { ArduinoComponent } from './arduino/arduino.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PythonStatusComponent
+    PythonStatusComponent,
+    ArduinoComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatSlideToggleModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,3 +4,11 @@
 mat-card-header {
   margin-bottom: 1rem;
 }
+.status {
+  mat-icon {
+    color: red;
+    &.active {
+      color: green;
+    }
+  }
+}
