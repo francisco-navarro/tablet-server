@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
 
-// Para acceder al valor de la variable
-console.log(environment.apiUrl); 
 
 @Component({
   selector: 'app-root',
   template: `
   <main>
-    <header class="brand-name">
-      foo bar
-    </header>
+    <h1 class="brand-name">
+      Application header
+    </h1>
     <section class="content">
-      {{apiUrl}}
+      <p>API express host: {{apiUrl}}</p>
+      <p>is production {{production}}</p>
       <app-python-status></app-python-status>
     </section>
   </main>
@@ -23,4 +22,5 @@ export class AppComponent {
   title = 'frontend-tablet';
 
   apiUrl = environment.apiUrl;
+  production = environment.production;
 }

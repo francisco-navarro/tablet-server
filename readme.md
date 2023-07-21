@@ -44,3 +44,7 @@ Está en `node/arduino.js`, mediante el fichero de configuración en la ruta pri
 
 
 # Front modo desarrollo
+
+`cd frontend-tablet`
+
+`ng serve`

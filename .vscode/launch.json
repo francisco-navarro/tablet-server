@@ -12,8 +12,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/index.js",
-      "runtimeExecutable": "${env:HOME}\\AppData\\Roaming\\nvm\\v12.22.12\\node"
+      "program": "${workspaceFolder}/index.js"
     },
     {
       "type": "node",
