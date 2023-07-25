@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PythonService } from 'src/services/python.service';
 
 @Component({
   selector: 'app-python-status',
@@ -51,7 +52,16 @@ import { Component } from '@angular/core';
 export class PythonStatusComponent {
   processStarted = false;
 
-  changeProcess() {
-    this.processStarted = !this.processStarted;
+  constructor(private pythonService: PythonService) {
+    this.pythonService.getIsStarted().then(result => this.processStarted = result);
+  }
+
+  async changeProcess() {
+    if (this.processStarted) {
+      await this.pythonService.stopProcess();
+    } else {
+      await this.pythonService.startProcess();
+    }
+    this.processStarted = await this.pythonService.getIsStarted();
   }
 }

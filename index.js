@@ -6,7 +6,7 @@ const debounce = require('debounce');
 
 const REFRESH_INTERVAL = 5000;
 
-const ENABLE_ARDUINO = false;
+const ENABLE_FCU_ARDUINO = false;
 
 
 
@@ -15,7 +15,7 @@ express.init();
 
 // loop to read variables
 // let myInterval = setTimeout(updateVars, REFRESH_INTERVAL);
-if (ENABLE_ARDUINO) { 
+if (ENABLE_FCU_ARDUINO) { 
   let debounceUpdateVars = debounce(updateFCUVars, 100);
 
   setTimeout(debounceUpdateVars, REFRESH_INTERVAL);
@@ -24,7 +24,7 @@ if (ENABLE_ARDUINO) {
 function updateFCUVars() {
   axios.get('http://localhost:8080/fcu').then(res => {
     console.log(`${res.data.AUTOPILOT_SPEED_SELECTED}-${res.data.AUTOPILOT_HEADING_SELECTED}-`);
-    if (ENABLE_ARDUINO) {
+    if (ENABLE_FCU_ARDUINO) {
       arduino.setHeading(res.data.AUTOPILOT_HEADING_SELECTED || ' ');
       arduino.setSpeed(res.data.AUTOPILOT_SPEED_SELECTED || ' ');
   
