@@ -39,3 +39,6 @@ vr.clear_sim_variables()
 
 def getVar(varname):
     return vr.get(varname);
+
+def sendEvent(event_name, payload):
+    return sm.send_event(event_name, payload);
